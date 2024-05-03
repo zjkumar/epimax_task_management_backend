@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors')
 const app = express();
-const port = 3000;
+const port = process.env.port || 5000;
 
 const jwt = require('jsonwebtoken');
 const secretKey = 'your_secret_key';
