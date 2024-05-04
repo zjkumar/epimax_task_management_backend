@@ -16,11 +16,12 @@ app.use(cors())
 
 // Create MySQL connection pool
 const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: 'srv873.hstgr.io',
-    user: 'u109247860_owner',
-    password: 'Sury@1729',
-    database: 'u109247860_epimax',
+
+    host: 'aiven-java-mysql-workshop-kumar-d59f.a.aivencloud.com',
+    user: 'avnadmin',
+    password: 'AVNS_nZOoqcmVXXLtttrfP7V',
+    database: 'epimax_task_management',
+    port: 25928,
     waitForConnections: true, // Whether the pool should queue connections when all connections are in use
   queueLimit: 0, // Maximum number of connection requests the pool will queue before returning an error
   connectTimeout: 60000, // The maximum number of milliseconds before a timeout occurs during the connection phase
