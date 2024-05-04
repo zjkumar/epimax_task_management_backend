@@ -38,7 +38,7 @@ const createTableQuery = `
 `;
 
 // Execute the query to create the table
-connection.query(createTableQuery, (err, results, fields) => {
+pool.query(createTableQuery, (err, results, fields) => {
   if (err) {
     console.error('Error creating table: ' + err.message);
     return;
