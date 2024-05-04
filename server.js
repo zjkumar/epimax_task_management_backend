@@ -28,6 +28,24 @@ const pool = mysql.createPool({
   acquireTimeout: 60000, 
 });
 
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    connected_with VARCHAR(255)
+  )
+`;
+
+// Execute the query to create the table
+connection.query(createTableQuery, (err, results, fields) => {
+  if (err) {
+    console.error('Error creating table: ' + err.message);
+    return;
+  }
+  console.log('Table created successfully');
+});
+
 
 // middleware to extract user ID from JWT token
 const getUserIdFromToken = (request, response, next) => {
