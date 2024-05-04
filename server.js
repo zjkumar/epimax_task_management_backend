@@ -25,26 +25,26 @@ const pool = mysql.createPool({
     waitForConnections: true, // Whether the pool should queue connections when all connections are in use
   queueLimit: 0, // Maximum number of connection requests the pool will queue before returning an error
   connectTimeout: 60000, // The maximum number of milliseconds before a timeout occurs during the connection phase
-  acquireTimeout: 60000, 
+  
 });
 
-const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    connected_with VARCHAR(255)
-  )
-`;
+// const createTableQuery = `
+//   CREATE TABLE IF NOT EXISTS users (
+//     id INT AUTO_INCREMENT PRIMARY KEY,
+//     full_name VARCHAR(255) NOT NULL,
+//     username VARCHAR(255) NOT NULL UNIQUE,
+//     connected_with VARCHAR(255)
+//   )
+// `;
 
-// Execute the query to create the table
-pool.query(createTableQuery, (err, results, fields) => {
-  if (err) {
-    console.error('Error creating table: ' + err.message);
-    return;
-  }
-  console.log('Table created successfully');
-});
+// // Execute the query to create the table
+// pool.query(createTableQuery, (err, results, fields) => {
+//   if (err) {
+//     console.error('Error creating table: ' + err.message);
+//     return;
+//   }
+//   console.log('Table created successfully');
+// });
 
 
 // middleware to extract user ID from JWT token
