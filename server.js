@@ -20,7 +20,11 @@ const pool = mysql.createPool({
     host: 'srv873.hstgr.io',
     user: 'u109247860_owner',
     password: 'Sury@1729',
-    database: 'u109247860_epimax'
+    database: 'u109247860_epimax',
+    waitForConnections: true, // Whether the pool should queue connections when all connections are in use
+  queueLimit: 0, // Maximum number of connection requests the pool will queue before returning an error
+  connectTimeout: 60000, // The maximum number of milliseconds before a timeout occurs during the connection phase
+  acquireTimeout: 60000, 
 });
 
 
