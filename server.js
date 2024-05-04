@@ -12,7 +12,7 @@ const secretKey = 'your_secret_key';
 app.use(bodyParser.json());
 
 // using cors
-app.use(cors())
+// app.use(cors())
 
 // Create MySQL connection pool
 const pool = mysql.createPool({
