@@ -12,7 +12,9 @@ const jwt = require('jsonwebtoken');
 const key = crypto.randomBytes(32);
 
 // Convert the key to a Base64-encoded string
-const secretKey = key.toString('base64');
+// const secretKey = key.toString('base64');
+
+const secretKey = 'a_4_Acquire'
 
 
 // Middleware to parse JSON bodies
@@ -67,20 +69,26 @@ const pool = mysql.createPool({
 const getUserIdFromToken = (request, response, next) => {
     let jwt_token;
     
-  const authHeader = request.headers.Authorization;
+  const authHeader = request.headers['authorization'];
+//   console.log(request.headers, 'these are request.headers')
 //   console.log(authHeader)
   if (authHeader !== undefined) {
     jwt_token = authHeader.split(" ")[1];
     // console.log(jwt_token)
   }
+
+    console.log(jwt_token, 'this is jwt token from client')
+  
+
   if (jwt_token === undefined) {
+    // console.log("jwt_token is not valid, consoling here")
     response.status(401);
     response.send("Invalid JWT Token");
   } else {
-    jwt.verify(jwt_token, Buffer.from(secretKey, 'base64'), async (error, payload) => {
+    jwt.verify(jwt_token, secretKey, async (error, payload) => {
       if (error) {
         console.log(error)
-        console.log('error occured here')
+        console.log('error occured when verifying the jwt token')
         response.status(401);
         response.send("Invalid JWT Token");
       } else {
