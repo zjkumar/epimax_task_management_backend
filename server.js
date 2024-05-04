@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const cors = require('cors')
@@ -6,7 +7,13 @@ const app = express();
 const port = process.env.port || 5000;
 
 const jwt = require('jsonwebtoken');
-const secretKey = 'your_secret_key';
+
+// Generate a secure random key of 32 bytes (256 bits)
+const key = crypto.randomBytes(32);
+
+// Convert the key to a Base64-encoded string
+const secretKey = key.toString('base64');
+
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -70,7 +77,7 @@ const getUserIdFromToken = (request, response, next) => {
     response.status(401);
     response.send("Invalid JWT Token");
   } else {
-    jwt.verify(jwt_token, secretKey, async (error, payload) => {
+    jwt.verify(jwt_token, Buffer.from(secretKey, 'base64'), async (error, payload) => {
       if (error) {
         console.log(error)
         console.log('error occured here')
