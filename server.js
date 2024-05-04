@@ -60,7 +60,7 @@ const pool = mysql.createPool({
 const getUserIdFromToken = (request, response, next) => {
     let jwt_token;
     
-  const authHeader = request.headers["authorization"];
+  const authHeader = request.headers.Authorization;
 //   console.log(authHeader)
   if (authHeader !== undefined) {
     jwt_token = authHeader.split(" ")[1];
