@@ -313,11 +313,11 @@ app.post('/updateTask', getUserIdFromToken, async (req, res) => {
 
 
 // Route to login the user
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     
     const {username} = req.body;
    
-    pool.query(`SELECT * FROM users WHERE username = '${username}'`, (error, results, fields) => {
+    await pool.query(`SELECT * FROM users WHERE username = '${username}'`, (error, results, fields) => {
         if (error) {
             console.error('Error finding user:', error);
             res.status(500).json({error: 'Failed to find user'});
